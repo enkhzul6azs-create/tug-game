@@ -1,206 +1,96 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
+  font-family: Arial;
+  text-align: center;
+  background: #f5f5f5;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6fb;
-  color: #222;
+  padding: 20px;
 }
 
-.page {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
+/* TEXT */
+#questionText {
+  font-size: 30px;
+  font-weight: bold;
 }
 
 #ruleLabel {
-  font-size: 34px;
-  margin: 10px 0 8px;
-  font-weight: 700;
-}
-
-#questionText {
-  font-size: 30px;
-  margin: 10px 0;
-  font-weight: 700;
+  font-size: 24px;
 }
 
 #statusText {
-  font-size: 22px;
-  margin: 10px 0 20px;
-  color: #444;
-  min-height: 28px;
+  font-size: 20px;
 }
 
+/* GAME AREA */
 .game-area {
   position: relative;
-  height: 360px;
-  margin: 20px auto 30px;
-  background: #ededed;
-  border-radius: 24px;
-  overflow: hidden;
+  height: 300px;
+  margin: 20px;
+  background: #eee;
+  border-radius: 20px;
 }
 
+/* 🔥 ГОЛЫН ЗУРААС */
 .center-line {
   position: absolute;
-  top: 8%;
-  bottom: 8%;
+  top: 10%;
+  bottom: 10%;
   left: 50%;
-  border-left: 5px dashed #444;
+  border-left: 5px dashed black;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 5;
 }
 
-.rope-group {
+/* ROPE */
+#ropeGroup {
   position: absolute;
   left: 50%;
-  top: 52%;
+  top: 50%;
   transform: translate(-50%, -50%);
   transition: transform 0.4s ease;
   z-index: 2;
 }
 
 .tug-image {
-  width: 720px;
-  max-width: 92vw;
-  height: auto;
-  display: block;
+  width: 600px;
 }
 
+/* TEAMS */
 .teams {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-around;
 }
 
-.team-box {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+.teams > div {
+  width: 40%;
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
 }
 
-.team-box h3 {
-  font-size: 26px;
-  margin: 0 0 16px;
-}
-
-.answers {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.answers button {
-  width: 100%;
-}
-
+/* BUTTON */
 button {
+  font-size: 20px;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
   border: none;
-  border-radius: 14px;
-  padding: 16px 14px;
-  font-size: 22px;
-  background: #e3e7ef;
-  color: #222;
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
 }
 
-button:hover {
-  transform: scale(1.03);
-  background: #d8deea;
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.75;
-}
-
+/* EFFECT */
 .correct {
-  background: #34a853 !important;
-  color: #fff !important;
+  background-color: green !important;
+  color: white;
 }
 
 .wrong {
-  background: #ea4335 !important;
-  color: #fff !important;
+  background-color: red !important;
+  color: white;
 }
 
+/* RESTART */
 #restartBtn {
-  background: #1a73e8;
-  color: #fff;
-  padding: 16px 28px;
-  font-size: 22px;
-}
-
-#restartBtn:hover {
-  background: #1765cc;
-}
-
-@media (max-width: 900px) {
-  #ruleLabel {
-    font-size: 28px;
-  }
-
-  #questionText {
-    font-size: 24px;
-  }
-
-  #statusText {
-    font-size: 19px;
-  }
-
-  .game-area {
-    height: 290px;
-  }
-
-  .tug-image {
-    width: 560px;
-  }
-
-  .teams {
-    grid-template-columns: 1fr;
-  }
-
-  .team-box h3 {
-    font-size: 22px;
-  }
-
-  button {
-    font-size: 18px;
-    padding: 14px 12px;
-  }
-
-  #restartBtn {
-    font-size: 20px;
-  }
-}
-/* ================= CENTER LINE FIX ================= */
-.game-area {
-  position: relative;
-}
-
-.center-line {
-  position: absolute;
-  top: 10%;
-  bottom: 10%;
-  left: 50%;
-  width: 0;
-  border-left: 5px dashed #333;
-  transform: translateX(-50%);
-  z-index: 5;
-  pointer-events: none;
-}
-
-/* Rope доор харагдахгүй байвал */
-#ropeGroup {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+  margin-top: 20px;
+  background: blue;
+  color: white;
 }
