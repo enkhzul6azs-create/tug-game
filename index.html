@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Монгол хэлний таталт тоглоом</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Таталт тоглоом</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="page">
-    <h1 id="ruleLabel">Монгол хэлний зөв бичих дүрэм</h1>
-    <h2 id="questionText">Асуулт ачааллаж байна...</h2>
-    <p id="statusText">Хэн түрүүлж зөв хариулах вэ?</p>
 
-    <div class="game-area">
-      <div class="center-line"></div>
-      <div id="ropeGroup" class="rope-group">
-        <img src="assets/tug-war.png" alt="Таталт тоглоом" class="tug-image" />
-      </div>
-    </div>
+<h2 id="ruleLabel">Монгол хэлний зөв бичих дүрэм</h2>
+<h3 id="questionText"></h3>
+<p id="statusText"></p>
 
-    <div class="teams">
-      <div class="team-box">
-        <h3>Баг 1</h3>
-        <div id="leftAnswers" class="answers"></div>
-      </div>
+<div class="game-area">
+  <!-- 🔥 ГОЛЫН ЗУРААС -->
+  <div class="center-line"></div>
 
-      <div class="team-box">
-        <h3>Баг 2</h3>
-        <div id="rightAnswers" class="answers"></div>
-      </div>
-    </div>
+  <!-- 🔥 ОЛС -->
+  <div id="ropeGroup">
+    <img src="assets/tug-war.png" class="tug-image">
+  </div>
+</div>
 
-    <button id="restartBtn">Дахин эхлүүлэх</button>
+<div class="teams">
+  <div>
+    <h3>Баг 1</h3>
+    <div id="leftAnswers"></div>
   </div>
 
-  <script src="script.js?v=40"></script>
+  <div>
+    <h3>Баг 2</h3>
+    <div id="rightAnswers"></div>
+  </div>
+</div>
+
+<button id="restartBtn">Дахин эхлүүлэх</button>
+
+<script src="script.js?v=50"></script>
 </body>
 </html>
