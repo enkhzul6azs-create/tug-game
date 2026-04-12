@@ -1,77 +1,197 @@
 const questions = [
+  // Я, Е, Ё
   {
-    rule: "Ялгах эгшиг",
+    topic: "Я, Е, Ё",
+    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["тэмдэг", "тэмдэгь", "темдэг", "тэмдг"],
-    correctAnswer: "тэмдэг"
+    options: ["зурий", "зуря", "зурья", "зуръя"],
+    correctAnswer: "зуръя"
   },
   {
-    rule: "Ялгах эгшиг",
+    topic: "Я, Е, Ё",
+    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["хичээл", "хичиэл", "хчээл", "хичээль"],
-    correctAnswer: "хичээл"
+    options: ["таря", "тарьё", "таръя", "тарий"],
+    correctAnswer: "таръя"
+  },
+   {
+    topic: "Я, Е, Ё",
+    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["уяая", "уяий", "уяъя", "уяя"],
+    correctAnswer: "уяя"
+  },
+   {
+    topic: "Я, Е, Ё",
+    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["оёё", "оёий", "оёъя", "оёоё"],
+    correctAnswer: "оёё"
+  },
+    {
+    topic: "Я, Е, Ё",
+    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["очё", "очий", "очъё", "очоё"],
+    correctAnswer: "очъё"
+  {
+    topic: "Я, Е, Ё",
+    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["ёсыг", "еосыг", "ёсийг", "ёосийг"],
+    correctAnswer: "ёсыг"
   },
   {
+    topic: "Я, Е, Ё",
+    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["аялалын", "аяалалын", "аялалийн", "аяалалын"],
+    correctAnswer: "аялалын"
+  },
+  {
+    topic: "Я, Е, Ё",
+    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["ууя", "ууё", "ууе", "уя"],
+    correctAnswer: "ууя"
+  },
+{
+    topic: "Я, Е, Ё",
+    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["тарья", "тары", "тарий", "таря"],
+    correctAnswer: "тарья"
+  },
+{
+    topic: "Я, Е, Ё",
+    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["иръе", "ирий", "ирье", "ирья"],
+    correctAnswer: "ирье"
+  },
+  // Ы / ИЙ
+  {
+    topic: "Ы / ИЙ",
     rule: "Эр үгийн ы, эм үгийн ий",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["номын", "номийн", "номынь", "номни"],
+    options: ["номын", "номийн", "номний", "ноомын"],
     correctAnswer: "номын"
   },
   {
+    topic: "Ы / ИЙ",
     rule: "Эр үгийн ы, эм үгийн ий",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["гэрийн", "гэрын", "гэрийнь", "гэриийн"],
+    options: ["гэрийн", "гэрын", "гэриийн", "гэрийнь"],
     correctAnswer: "гэрийн"
   },
   {
+    topic: "Ы / ИЙ",
     rule: "Эр үгийн ы, эм үгийн ий",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["морины", "мориний", "морны", "морийны"],
+    options: ["морины", "мориний", "морны", "морьны"],
     correctAnswer: "морины"
   },
   {
-    rule: "Г зөв залгах",
+    topic: "Ы / ИЙ",
+    rule: "Эр үгийн ы, эм үгийн ий",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["өгүүлбэр", "өгуулбэр", "өгүлбэр", "өгүүлбэрь"],
-    correctAnswer: "өгүүлбэр"
+    options: ["голын", "голийн", "голний", "голынь"],
+    correctAnswer: "голын"
   },
   {
-    rule: "Г зөв залгах",
+    topic: "Ы / ИЙ",
+    rule: "Эр үгийн ы, эм үгийн ий",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["хөгжим", "хогжим", "хөгжэм", "хөгжимь"],
-    correctAnswer: "хөгжим"
+    options: ["хүүхдийн", "хүүхдын", "хүүхдиин", "хүүхдийнь"],
+    correctAnswer: "хүүхдийн"
   },
   {
+    topic: "Ы / ИЙ",
+    rule: "Эр үгийн ы, эм үгийн ий",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["уулын", "уулийн", "уулний", "уулынь"],
+    correctAnswer: "уулын"
+  },
+
+  // Залган бичих
+  {
+    topic: "Залган бичих",
     rule: "Залган бичих дүрэм",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["номонд", "номнд", "номмонд", "номондь"],
+    options: ["номонд", "номнд", "номмонд", "номоонд"],
     correctAnswer: "номонд"
   },
   {
+    topic: "Залган бичих",
     rule: "Залган бичих дүрэм",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["сургуульд", "сургуулид", "сургуйлд", "сургуулььд"],
+    options: ["сургуульд", "сургуулид", "сургуйлд", "сургуйльд"],
     correctAnswer: "сургуульд"
   },
   {
+    topic: "Залган бичих",
     rule: "Залган бичих дүрэм",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["багштай", "багштэй", "бахштай", "багштаи"],
+    options: ["багштай", "багштэй", "бахштай", "багштаий"],
     correctAnswer: "багштай"
   },
   {
-    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
+    topic: "Залган бичих",
+    rule: "Залган бичих дүрэм",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["баяр", "байар", "баиар", "баяар"],
-    correctAnswer: "баяр"
+    options: ["хичээлээр", "хичээлэр", "хичээлеэр", "хичэлээр"],
+    correctAnswer: "хичээлээр"
   },
   {
-    rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
+    topic: "Залган бичих",
+    rule: "Залган бичих дүрэм",
     question: "Аль нь зөв бичигдсэн бэ?",
-    options: ["оюутан", "ойутан", "оювтан", "оюутэн"],
-    correctAnswer: "оюутан"
-  }
-];
+    options: ["дэвтэрт", "дэвтэрд", "дэвтэртт", "дэвтэрть"],
+    correctAnswer: "дэвтэрт"
+  },
+  {
+    topic: "Залган бичих",
+    rule: "Залган бичих дүрэм",
+    question: "Хоосон зайд зөв үгийг сонго: Би ___ явсан.",
+    options: ["сургуульн", "сургуулийн, "сургуйлийн", "сургуулын"],
+    correctAnswer: "сургуулийн"
+  },
+
+  // Ялгах эгшиг
+  {
+    topic: "Ялгах эгшиг",
+    rule: "Ялгах эгшгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["тэмдэгийг", "тэмдгийг", "тэмдгыг", "тэмдэгыг"],
+    correctAnswer: "тэмдгийг"
+  },
+  {
+    topic: "Ялгах эгшиг",
+    rule: "Ялгах эгшгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["хичээлын", "хижээлийн", "хичэлийн, "хичээлийн"],
+    correctAnswer: "хичээлийн"
+  },
+  {
+    topic: "Ялгах эгшиг",
+    rule: "Ялгах эгшгийн зөв хэрэглээ",
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["эмнэлэг", "эмнлэг", "эмнэлэгь", "эмнэлэгг"],
+    correctAnswer: "эмнэлэг"
+  },
+
+
+
+ 
+ 
+
+const topicMap = {
+  yaeeyo: "Я, Е, Ё",
+  yi: "Ы / ИЙ",
+  zalgah: "Залган бичих",
+  yalgah: "Ялгах эгшиг",
+  g: "Г зөв залгах"
+};
 
 const questionText = document.getElementById("questionText");
 const ruleLabel = document.getElementById("ruleLabel");
@@ -92,6 +212,11 @@ let questionCount = 0;
 let currentQuestionData = null;
 let autoNextTimeout = null;
 
+let currentTopic = null;
+let filteredQuestions = [];
+let questionQueue = [];
+let queueIndex = 0;
+
 const STEP = 36;
 const WIN_LIMIT = 180;
 const AUTO_NEXT_DELAY = 1000;
@@ -105,9 +230,47 @@ function shuffleArray(array) {
   return arr;
 }
 
-function getRandomQuestion() {
-  const randomIndex = Math.floor(Math.random() * questions.length);
-  return questions[randomIndex];
+function getTopicFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const topicKey = params.get("topic");
+
+  if (topicKey && topicMap[topicKey]) {
+    return topicMap[topicKey];
+  }
+
+  return null;
+}
+
+function prepareQuestions() {
+  currentTopic = getTopicFromUrl();
+
+  if (currentTopic) {
+    filteredQuestions = questions.filter(q => q.topic === currentTopic);
+  } else {
+    filteredQuestions = [...questions];
+  }
+
+  if (filteredQuestions.length === 0) {
+    filteredQuestions = [...questions];
+  }
+
+  questionQueue = shuffleArray(filteredQuestions);
+  queueIndex = 0;
+}
+
+function getNextQuestion() {
+  if (questionQueue.length === 0) {
+    return null;
+  }
+
+  if (queueIndex >= questionQueue.length) {
+    questionQueue = shuffleArray(filteredQuestions);
+    queueIndex = 0;
+  }
+
+  const question = questionQueue[queueIndex];
+  queueIndex += 1;
+  return question;
 }
 
 function updateScore() {
@@ -139,12 +302,18 @@ function renderQuestion() {
   roundLocked = false;
   questionCount += 1;
 
-  const q = getRandomQuestion();
-  const shuffledOptions = shuffleArray(q.options);
+  const q = getNextQuestion();
+
+  if (!q) {
+    questionText.textContent = "Асуулт олдсонгүй.";
+    ruleLabel.textContent = "Дүрэм: -";
+    statusText.textContent = "Асуултын сан хоосон байна.";
+    return;
+  }
 
   currentQuestionData = {
     ...q,
-    shuffledOptions
+    shuffledOptions: shuffleArray(q.options)
   };
 
   questionNumberEl.textContent = questionCount;
@@ -241,6 +410,8 @@ function restartGame() {
   questionCount = 0;
   currentQuestionData = null;
 
+  prepareQuestions();
+
   ropeGroup.style.setProperty("--rope-x", "0px");
   ropeGroup.style.transform = "translate(-50%, -50%) translateX(0px)";
   ropeGroup.classList.remove("bounce-left", "bounce-right");
@@ -252,4 +423,4 @@ function restartGame() {
 restartBtn.addEventListener("click", restartGame);
 
 updateScore();
-renderQuestion();
+restartGame();
