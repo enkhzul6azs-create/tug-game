@@ -1,8 +1,4 @@
-alert("GAME RESTORED VERSION");
-
-// ================= QUESTIONS =================
 const questions = [
-  // ================= Я, Е, Ё =================
   {
     topic: "Я, Е, Ё",
     rule: "Я, Е, Ё үсгийн зөв хэрэглээ",
@@ -74,7 +70,6 @@ const questions = [
     correctAnswer: "ирье"
   },
 
-  // ================= Ы / ИЙ =================
   {
     topic: "Ы / ИЙ",
     rule: "Эр үгийн ы, эм үгийн ий",
@@ -118,7 +113,6 @@ const questions = [
     correctAnswer: "уулын"
   },
 
-  // ================= ЗАЛГАН БИЧИХ =================
   {
     topic: "Залган бичих",
     rule: "Залган бичих дүрэм",
@@ -162,7 +156,6 @@ const questions = [
     correctAnswer: "сургуулийн"
   },
 
-  // ================= ЯЛГАХ ЭГШИГ =================
   {
     topic: "Ялгах эгшиг",
     rule: "Ялгах эгшгийн зөв хэрэглээ",
@@ -186,7 +179,6 @@ const questions = [
   }
 ];
 
-// ================= ELEMENTS =================
 const questionText = document.getElementById("questionText");
 const ruleLabel = document.getElementById("ruleLabel");
 const leftAnswers = document.getElementById("leftAnswers");
@@ -195,18 +187,15 @@ const statusText = document.getElementById("statusText");
 const restartBtn = document.getElementById("restartBtn");
 const ropeGroup = document.getElementById("ropeGroup");
 
-// ================= VARIABLES =================
 let currentQuestion = null;
 let ropePosition = 0;
 let roundLocked = false;
-
 let questionQueue = [];
 let currentQuestionIndex = 0;
 
 const STEP = 40;
 const WIN_LIMIT = 200;
 
-// ================= HELPERS =================
 function shuffle(array) {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
@@ -245,7 +234,7 @@ function moveRope(direction) {
     ropePosition += STEP;
   }
 
-  ropeGroup.style.transform = `translateX(calc(-50% + ${ropePosition}px))`;
+  ropeGroup.style.transform = `translate(calc(-50% + ${ropePosition}px), -50%)`;
 }
 
 function checkWinner() {
@@ -268,7 +257,6 @@ function checkWinner() {
   return false;
 }
 
-// ================= RENDER =================
 function renderQuestion() {
   roundLocked = false;
   currentQuestion = getNextQuestion();
@@ -297,12 +285,9 @@ function renderQuestion() {
   });
 }
 
-// ================= ANSWER LOGIC =================
 function checkAnswer(answer, team, clickedBtn) {
   if (roundLocked) return;
   if (clickedBtn.disabled) return;
-
-  const allButtons = document.querySelectorAll("#leftAnswers button, #rightAnswers button");
 
   if (answer === currentQuestion.correctAnswer) {
     roundLocked = true;
@@ -326,16 +311,14 @@ function checkAnswer(answer, team, clickedBtn) {
   statusText.textContent = "Буруу! Дахин оролдоно уу.";
 }
 
-// ================= RESTART =================
 function restartGame() {
   ropePosition = 0;
   roundLocked = false;
-  ropeGroup.style.transform = "translateX(-50%)";
+  ropeGroup.style.transform = "translate(-50%, -50%)";
   prepareQuestionQueue();
   renderQuestion();
 }
 
-// ================= START =================
 restartBtn.addEventListener("click", restartGame);
 prepareQuestionQueue();
 renderQuestion();
