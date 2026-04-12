@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Монгол хэлний таталт тоглоом</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-container">
+    <h1>Монгол хэлний зөв бичих дүрэм - Таталт тоглоом</h1>
+
+    <div class="topbar">
+      <div class="team-card left-card">
+        <h2>Баг 1</h2>
+        <p>Оноо: <span id="scoreLeft">0</span></p>
+      </div>
+
+      <div class="center-card">
+        <p>Асуулт: <span id="questionNumber">1</span></p>
+        <p id="ruleLabel">Дүрэм: -</p>
+        <p id="statusText">Хэн түрүүлж зөв хариулах вэ?</p>
+      </div>
+
+      <div class="team-card right-card">
+        <h2>Баг 2</h2>
+        <p>Оноо: <span id="scoreRight">0</span></p>
+      </div>
+    </div>
+
+    <div class="question-box">
+      <h3 id="questionText">Асуулт ачааллаж байна...</h3>
+    </div>
+
+    <div class="arena">
+      <div class="center-line"></div>
+
+      <div class="rope-track">
+        <div id="ropeGroup" class="rope-group">
+          <img src="assets/tug-war.png" alt="Таталт" class="tug-image" />
+        </div>
+      </div>
+    </div>
+
+    <div class="answers-layout">
+      <div class="answer-panel left-panel">
+        <h3>Баг 1</h3>
+        <div id="leftAnswers" class="answers-grid"></div>
+      </div>
+
+      <div class="answer-panel right-panel">
+        <h3>Баг 2</h3>
+        <div id="rightAnswers" class="answers-grid"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="restartBtn">Дахин эхлүүлэх</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
