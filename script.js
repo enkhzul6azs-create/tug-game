@@ -33,6 +33,8 @@ const restartBtn = document.getElementById("restartBtn");
 
 let currentQuestion;
 let ropePosition = 0;
+let roundLocked = false;
+
 const STEP = 40;
 const WIN_LIMIT = 200;
 
@@ -43,6 +45,8 @@ function shuffle(arr) {
 }
 
 function renderQuestion() {
+  roundLocked = false;
+
   currentQuestion = questions[Math.floor(Math.random() * questions.length)];
 
   questionText.textContent = currentQuestion.question;
@@ -55,12 +59,12 @@ function renderQuestion() {
   shuffled.forEach(opt => {
     const btn1 = document.createElement("button");
     btn1.textContent = opt;
-    btn1.onclick = () => checkAnswer(opt, "left");
+    btn1.onclick = () => checkAnswer(opt, "left", btn1);
     leftAnswers.appendChild(btn1);
 
     const btn2 = document.createElement("button");
     btn2.textContent = opt;
-    btn2.onclick = () => checkAnswer(opt, "right");
+    btn2.onclick = () => checkAnswer(opt, "right", btn2);
     rightAnswers.appendChild(btn2);
   });
 }
@@ -86,21 +90,48 @@ function checkWinner() {
   }
 }
 
-function checkAnswer(answer, team) {
+function disableAllButtons() {
+  document.querySelectorAll("button").forEach(btn => {
+    btn.disabled = true;
+  });
+}
+
+function checkAnswer(answer, team, clickedBtn) {
+  if (roundLocked) return;
+  roundLocked = true;
+
+  const allButtons = document.querySelectorAll("#leftAnswers button, #rightAnswers button");
+
+  // зөв товчийг ногоон болгох
+  allButtons.forEach(btn => {
+    if (btn.textContent === currentQuestion.correctAnswer) {
+      btn.classList.add("correct");
+    }
+  });
+
   if (answer === currentQuestion.correctAnswer) {
     statusText.textContent = "Зөв!";
+    clickedBtn.classList.add("correct");
 
     moveRope(team);
-
-    setTimeout(renderQuestion, 1000);
   } else {
     statusText.textContent = "Буруу!";
+    clickedBtn.classList.add("wrong");
   }
+
+  disableAllButtons();
+
+  setTimeout(() => {
+    renderQuestion();
+  }, 1000);
 }
 
 function restartGame() {
   ropePosition = 0;
+  roundLocked = false;
+
   document.getElementById("ropeGroup").style.transform = "translateX(-50%)";
+
   renderQuestion();
 }
 
