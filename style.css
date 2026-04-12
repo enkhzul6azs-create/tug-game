@@ -179,3 +179,28 @@ button:disabled {
     font-size: 20px;
   }
 }
+/* ================= CENTER LINE FIX ================= */
+.game-area {
+  position: relative;
+}
+
+.center-line {
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  width: 0;
+  border-left: 5px dashed #333;
+  transform: translateX(-50%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Rope доор харагдахгүй байвал */
+#ropeGroup {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
