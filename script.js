@@ -1,4 +1,4 @@
-alert("GAME WORKING");
+alert("GAME FINAL VERSION");
 
 // ================= QUESTIONS =================
 const questions = [
@@ -16,6 +16,11 @@ const questions = [
     question: "Аль нь зөв бичигдсэн бэ?",
     options: ["тэмдэгийг", "тэмдгийг", "тэмдгыг", "тэмдэгыг"],
     correctAnswer: "тэмдгийг"
+  },
+  {
+    question: "Аль нь зөв бичигдсэн бэ?",
+    options: ["гэрийн", "гэрын", "гэриийн", "гэрийнь"],
+    correctAnswer: "гэрийн"
   }
 ];
 
@@ -29,6 +34,7 @@ const restartBtn = document.getElementById("restartBtn");
 let currentQuestion;
 let ropePosition = 0;
 const STEP = 40;
+const WIN_LIMIT = 200;
 
 // ================= FUNCTIONS =================
 
@@ -65,14 +71,26 @@ function moveRope(direction) {
 
   const rope = document.getElementById("ropeGroup");
   rope.style.transform = `translateX(calc(-50% + ${ropePosition}px))`;
+
+  checkWinner();
+}
+
+function checkWinner() {
+  if (ropePosition <= -WIN_LIMIT) {
+    alert("🏆 Баг 1 яллаа!");
+    restartGame();
+  }
+  if (ropePosition >= WIN_LIMIT) {
+    alert("🏆 Баг 2 яллаа!");
+    restartGame();
+  }
 }
 
 function checkAnswer(answer, team) {
   if (answer === currentQuestion.correctAnswer) {
     statusText.textContent = "Зөв!";
 
-    if (team === "left") moveRope("left");
-    else moveRope("right");
+    moveRope(team);
 
     setTimeout(renderQuestion, 1000);
   } else {
