@@ -1,3 +1,4 @@
+alert("SCRIPT AJILLAJ BAINA");
 const questions = [
   // Я, Е, Ё
   {
