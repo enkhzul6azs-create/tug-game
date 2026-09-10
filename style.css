@@ -7,11 +7,10 @@ body {
   text-align: center;
   background: #f1f5f9;
   margin: 0;
-  padding: 12px 16px;
+  padding: 10px 16px;
   color: #0f172a;
 }
 
-/* ДҮРМИЙН ГАРЧИГ */
 #ruleLabel {
   font-size: 32px;
   font-weight: 900;
@@ -19,7 +18,6 @@ body {
   margin: 0 0 6px;
 }
 
-/* ТОМ ТОД АСУУЛТ */
 #questionText {
   font-size: 28px;
   font-weight: 800;
@@ -28,7 +26,6 @@ body {
   margin: 6px 0;
 }
 
-/* ТӨЛӨВ */
 #statusText {
   font-size: 22px;
   font-weight: bold;
@@ -36,20 +33,20 @@ body {
   margin: 4px 0 10px;
 }
 
-/* ТОГЛООМЫН ТАЛБАЙ */
+/* ОЛС ТАТАЛТЫН ТАЛБАЙ */
 .game-area {
   position: relative;
-  height: 280px;
-  max-width: 920px;
+  height: 260px;
+  max-width: 960px;
   margin: 0 auto 16px;
   background: #ffffff;
   border: 4px solid #cbd5e1;
-  border-radius: 22px;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
 }
 
-/* 🔥 ДУУСТАЛ НЬ ТАСАЛДАХГҮЙ ГАРГАХ УЛААН ЗУРААС */
+/* УЛААН ТАСАРХАЙ ЗУРААС */
 .center-line {
   position: absolute;
   top: 0;
@@ -65,37 +62,36 @@ body {
     transparent 24px
   );
   transform: translateX(-50%);
-  z-index: 10; /* Зургийнхаа урдуур тод гарч ирнэ */
+  z-index: 10;
   pointer-events: none;
 }
 
-/* ОЛС БА ЗУРАГ */
 #ropeGroup {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(calc(-50% + 32px), -50%);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: 2; /* Шугамын ард байна */
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* ЗУРГИЙГ ТОМРУУЛСАН */
 .tug-image {
-  height: 220px;
+  height: 230px;
   max-width: none;
   pointer-events: none;
   user-select: none;
   mix-blend-mode: multiply;
 }
 
-/* БАГУУДЫН ХЭСЭГ */
 .teams {
   display: flex;
   justify-content: center;
-  gap: 18px;
-  max-width: 920px;
+  gap: 16px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -103,7 +99,7 @@ body {
   flex: 1;
   background: #ffffff;
   padding: 12px 14px;
-  border-radius: 18px;
+  border-radius: 16px;
   border: 2px solid #e2e8f0;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
 }
@@ -117,14 +113,12 @@ body {
   padding-bottom: 6px;
 }
 
-/* 4 СОНГОЛТ (2 баганаар өрөх) */
 #leftAnswers, #rightAnswers {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 
-/* ТОВЧЛУУРУУД */
 button {
   display: flex;
   align-items: center;
@@ -171,12 +165,11 @@ button:disabled {
   color: #ffffff !important;
 }
 
-/* ДАХИН ТОГЛОХ ТОВЧ */
 #restartBtn {
   display: inline-block;
   width: auto;
   min-width: 190px;
-  margin-top: 12px;
+  margin-top: 10px;
   padding: 10px 26px;
   font-size: 18px;
   font-weight: 800;
