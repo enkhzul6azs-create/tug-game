@@ -134,9 +134,11 @@ let roundLocked = false;
 let isGameOver = false;
 let availableQuestions = [];
 
-// 25px * 6 = 150px (Яг 6 удаа зөв татаж байж ялна)
-const STEP_SIZE = 25;
-const WIN_LIMIT = 150;
+const OFFSET_X = 32; // Шинэ зургийн улаан тугийг голлуулах тохиргоо
+
+// 36px * 8 = 288px (Яг 8 удаа зөв татаж байж 3 дахь хүүхэд улаан шугамыг бүрэн давна)
+const STEP_SIZE = 36;
+const WIN_LIMIT = 285;
 
 function shuffle(arr) {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -174,16 +176,15 @@ function renderQuestion() {
 }
 
 function moveRope(dir) {
-  // Зүүн баг зөв хариулбал олс зүүн тийш (-), Баруун баг зөв хариулбал баруун тийш (+)
   ropePosition += dir === "left" ? -STEP_SIZE : STEP_SIZE;
-  ropeGroup.style.transform = `translate(calc(-50% + ${ropePosition}px), -50%)`;
+  ropeGroup.style.transform = `translate(calc(-50% + ${OFFSET_X}px + ${ropePosition}px), -50%)`;
 
-  // Зүүн тийш 150px татагдвал: Баг 1 ялж, Баг 2 ялагдана
+  // Зүүн тийш 8 удаа татагдаж 3 дахь хүүхэд шугамаас бүрэн гарахад
   if (ropePosition <= -WIN_LIMIT) {
     endGame("Баг 2 ялагдлаа! Баг 1 яллаа! 🏆");
     return true;
   }
-  // Баруун тийш 150px татагдвал: Баг 2 ялж, Баг 1 ялагдана
+  // Баруун тийш 8 удаа татагдаж 3 дахь хүүхэд шугамаас бүрэн гарахад
   if (ropePosition >= WIN_LIMIT) {
     endGame("Баг 1 ялагдлаа! Баг 2 яллаа! 🏆");
     return true;
@@ -198,9 +199,8 @@ function endGame(message) {
   questionText.textContent = "Тоглоом дууслаа!";
   statusText.textContent = message;
   statusText.style.color = "#dc2626";
-  statusText.style.fontSize = "24px";
+  statusText.style.fontSize = "26px";
 
-  // Бүх товчлуурыг дарж болохгүй болгох
   document.querySelectorAll(".teams button").forEach(btn => btn.disabled = true);
 }
 
@@ -229,8 +229,8 @@ restartBtn.onclick = () => {
   ropePosition = 0;
   isGameOver = false;
   roundLocked = false;
-  ropeGroup.style.transform = "translate(-50%, -50%)";
-  statusText.style.fontSize = "20px";
+  ropeGroup.style.transform = `translate(calc(-50% + ${OFFSET_X}px), -50%)`;
+  statusText.style.fontSize = "22px";
   availableQuestions = [];
   renderQuestion();
 };
