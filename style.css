@@ -36,7 +36,7 @@ body {
   margin: 4px 0 10px;
 }
 
-/* ӨМНӨХ ШИГ ТОМ ӨРГӨН ТАЛБАЙ */
+/* ТОГЛООМЫН ТАЛБАЙ */
 .game-area {
   position: relative;
   height: 280px;
@@ -49,14 +49,14 @@ body {
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
 }
 
-/* ДЭЭРЭЭС ДООШОО ГҮЙЦЭТ ДҮҮРСЭН УЛААН ТАСАРХАЙ ЗУРААС */
+/* 🔥 ДУУСТАЛ НЬ ТАСАЛДАХГҮЙ ГАРГАХ УЛААН ЗУРААС */
 .center-line {
   position: absolute;
   top: 0;
   bottom: 0;
-  height: 100%;
   left: 50%;
-  width: 5px;
+  width: 4px;
+  height: 100%;
   background: repeating-linear-gradient(
     to bottom,
     #ef4444 0px,
@@ -65,23 +65,23 @@ body {
     transparent 24px
   );
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 10; /* Зургийнхаа урдуур тод гарч ирнэ */
+  pointer-events: none;
 }
 
-/* ОЛС БА ЗУРГИЙГ ГОЛЛОХ */
+/* ОЛС БА ЗУРАГ */
 #ropeGroup {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: 2;
+  z-index: 2; /* Шугамын ард байна */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* ӨМНӨХ ШИГЭЭ ТОМ ЗУРАГ */
 .tug-image {
   height: 220px;
   max-width: none;
@@ -117,14 +117,14 @@ body {
   padding-bottom: 6px;
 }
 
-/* 4 СОНГОЛТЫГ 2 ЭГНЭЭГЭЭР ӨРӨХ (Өндрийг хэмнэж дэлгэцэнд бүрэн багтаана) */
+/* 4 СОНГОЛТ (2 баганаар өрөх) */
 #leftAnswers, #rightAnswers {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 
-/* СОНГОЛТЫН ТОВЧЛУУРУУД */
+/* ТОВЧЛУУРУУД */
 button {
   display: flex;
   align-items: center;
