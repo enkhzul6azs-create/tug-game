@@ -118,61 +118,6 @@ const questions = [
     question: "'Явдал + ыг' нийлбэрийг зөв бичсэн нь аль вэ?",
     options: ["явдлыг", "явдалыг", "явдалийг", "явдлийг"],
     correctAnswer: "явдлыг"
-  },
-  {
-    question: "'Торго + оор' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["торгоор", "торгоноор", "торгоороо", "торгоны"],
-    correctAnswer: "торгоор"
-  },
-  {
-    question: "'Цэнэг + ээр' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["цэнэгээр", "цэнгээр", "цэнэгээрээ", "цэнгээрээ"],
-    correctAnswer: "цэнэгээр"
-  },
-  {
-    question: "'Цэнгэ + өөр' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["цэнгээр", "цэнгөөр", "цэнгээрээ", "цэнгэвээр"],
-    correctAnswer: "цэнгээр"
-  },
-  {
-    question: "'Сонго + оор' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["сонгоор", "сонгоороо", "сонгоноор", "сонгуураар"],
-    correctAnswer: "сонгоор"
-  },
-  {
-    question: "'Нөхөр + өөс' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["нөхрөөс", "нөхөрөөс", "нөхрөөсөө", "нөхөрнөөс"],
-    correctAnswer: "нөхрөөс"
-  },
-  {
-    question: "'Төмөр + өөр' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["төмрөөр", "төмөрөөр", "төмрөөрөө", "төмөрнөөр"],
-    correctAnswer: "төмрөөр"
-  },
-  {
-    question: "'Эцэг + ээс' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["эцгээс", "эцэгээс", "эцгээсээ", "эцэгнээс"],
-    correctAnswer: "эцгээс"
-  },
-  {
-    question: "'Ишиг + ийг' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["ишгийг", "ишигийг", "ишгий", "ишигнийг"],
-    correctAnswer: "ишгийг"
-  },
-  {
-    question: "'Туувар + аас' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["туувраас", "туувараас", "туувраасаа", "тууварнаас"],
-    correctAnswer: "туувраас"
-  },
-  {
-    question: "'Салхи + аар' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["салхиар", "салхиаар", "салхьяар", "салхинаар"],
-    correctAnswer: "салхиар"
-  },
-  {
-    question: "'Туурга + ыг' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["туургыг", "туургаыг", "туургийг", "туурганыг"],
-    correctAnswer: "туургыг"
   }
 ];
 
@@ -186,18 +131,13 @@ const restartBtn = document.getElementById("restartBtn");
 let currentQuestion;
 let ropePosition = 0;
 let roundLocked = false;
-let isGameOver = false;
 let availableQuestions = [];
-
-const WIN_LIMIT = 200; // Олс хүрч дуусах хязгаар (пикселээр)
 
 function shuffle(arr) {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
 function renderQuestion() {
-  if (isGameOver) return;
-
   roundLocked = false;
   statusText.textContent = "";
 
@@ -227,63 +167,30 @@ function renderQuestion() {
 }
 
 function moveRope(dir) {
-  ropePosition += dir === "left" ? -50 : 50;
+  ropePosition += dir === "left" ? -40 : 40;
   ropeGroup.style.transform = `translate(calc(-50% + ${ropePosition}px), -50%)`;
-
-  // Зүүн тийш хэт татагдвал: Баруун талын баг (Баг 2) ялагдана
-  if (ropePosition <= -WIN_LIMIT) {
-    endGame("Баг 2 ялагдлаа! (Баг 1 хожлоо 🏆)");
-    return true;
-  }
-  // Баруун тийш хэт татагдвал: Зүүн талын баг (Баг 1) ялагдана
-  if (ropePosition >= WIN_LIMIT) {
-    endGame("Баг 1 ялагдлаа! (Баг 2 хожлоо 🏆)");
-    return true;
-  }
-
-  return false;
-}
-
-function endGame(message) {
-  isGameOver = true;
-  roundLocked = true;
-  questionText.textContent = "Тоглоом дууслаа!";
-  statusText.textContent = message;
-  statusText.style.color = "#dc2626";
-  statusText.style.fontSize = "24px";
-
-  // Бүх товчлуурыг идэвхгүй болгох
-  document.querySelectorAll(".teams button").forEach(btn => btn.disabled = true);
 }
 
 function checkAnswer(answer, team, btn) {
-  if (roundLocked || isGameOver) return;
+  if (roundLocked) return;
 
   if (answer === currentQuestion.correctAnswer) {
     roundLocked = true;
     btn.classList.add("correct");
-    statusText.style.color = "#16a34a";
     statusText.textContent = `${team === "left" ? "Баг 1" : "Баг 2"} зөв хариуллаа!`;
+    moveRope(team);
 
-    const finished = moveRope(team);
-
-    if (!finished) {
-      setTimeout(renderQuestion, 1000);
-    }
+    setTimeout(renderQuestion, 1000);
   } else {
     btn.classList.add("wrong");
     btn.disabled = true;
-    statusText.style.color = "#dc2626";
     statusText.textContent = "Буруу байна, дахин оролдоно уу!";
   }
 }
 
 restartBtn.onclick = () => {
   ropePosition = 0;
-  isGameOver = false;
-  roundLocked = false;
   ropeGroup.style.transform = "translate(-50%, -50%)";
-  statusText.style.fontSize = "20px";
   availableQuestions = [];
   renderQuestion();
 };
