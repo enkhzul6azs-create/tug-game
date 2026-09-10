@@ -96,7 +96,7 @@ const questions = [
   },
   {
     question: "'Амраг + ийн' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["амргийн", "амрагийн", "амрагын", "амргын"],
+    options: ["амрагийн", "амргийн", "амрагын", "амргын"],
     correctAnswer: "амрагийн"
   },
   {
@@ -134,7 +134,9 @@ let roundLocked = false;
 let isGameOver = false;
 let availableQuestions = [];
 
-const WIN_LIMIT = 200; // Олс татагдаж дуусах хязгаар
+// 25px * 6 = 150px (Яг 6 удаа зөв татаж байж ялна)
+const STEP_SIZE = 25;
+const WIN_LIMIT = 150;
 
 function shuffle(arr) {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -172,17 +174,18 @@ function renderQuestion() {
 }
 
 function moveRope(dir) {
-  ropePosition += dir === "left" ? -50 : 50;
+  // Зүүн баг зөв хариулбал олс зүүн тийш (-), Баруун баг зөв хариулбал баруун тийш (+)
+  ropePosition += dir === "left" ? -STEP_SIZE : STEP_SIZE;
   ropeGroup.style.transform = `translate(calc(-50% + ${ropePosition}px), -50%)`;
 
-  // Зүүн тийш тултал татвал: Баруун талын баг (Баг 2) ялагдана
+  // Зүүн тийш 150px татагдвал: Баг 1 ялж, Баг 2 ялагдана
   if (ropePosition <= -WIN_LIMIT) {
-    endGame("Баг 2 ялагдлаа! (Баг 1 хожлоо 🏆)");
+    endGame("Баг 2 ялагдлаа! Баг 1 яллаа! 🏆");
     return true;
   }
-  // Баруун тийш тултал татвал: Зүүн талын баг (Баг 1) ялагдана
+  // Баруун тийш 150px татагдвал: Баг 2 ялж, Баг 1 ялагдана
   if (ropePosition >= WIN_LIMIT) {
-    endGame("Баг 1 ялагдлаа! (Баг 2 хожлоо 🏆)");
+    endGame("Баг 1 ялагдлаа! Баг 2 яллаа! 🏆");
     return true;
   }
 
@@ -197,6 +200,7 @@ function endGame(message) {
   statusText.style.color = "#dc2626";
   statusText.style.fontSize = "24px";
 
+  // Бүх товчлуурыг дарж болохгүй болгох
   document.querySelectorAll(".teams button").forEach(btn => btn.disabled = true);
 }
 
@@ -211,7 +215,7 @@ function checkAnswer(answer, team, btn) {
 
     const finished = moveRope(team);
     if (!finished) {
-      setTimeout(renderQuestion, 1000);
+      setTimeout(renderQuestion, 900);
     }
   } else {
     btn.classList.add("wrong");
