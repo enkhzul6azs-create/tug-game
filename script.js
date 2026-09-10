@@ -131,13 +131,18 @@ const restartBtn = document.getElementById("restartBtn");
 let currentQuestion;
 let ropePosition = 0;
 let roundLocked = false;
+let isGameOver = false;
 let availableQuestions = [];
+
+const WIN_LIMIT = 200; // Олс татагдаж дуусах хязгаар
 
 function shuffle(arr) {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
 function renderQuestion() {
+  if (isGameOver) return;
+
   roundLocked = false;
   statusText.textContent = "";
 
@@ -167,30 +172,61 @@ function renderQuestion() {
 }
 
 function moveRope(dir) {
-  ropePosition += dir === "left" ? -40 : 40;
+  ropePosition += dir === "left" ? -50 : 50;
   ropeGroup.style.transform = `translate(calc(-50% + ${ropePosition}px), -50%)`;
+
+  // Зүүн тийш тултал татвал: Баруун талын баг (Баг 2) ялагдана
+  if (ropePosition <= -WIN_LIMIT) {
+    endGame("Баг 2 ялагдлаа! (Баг 1 хожлоо 🏆)");
+    return true;
+  }
+  // Баруун тийш тултал татвал: Зүүн талын баг (Баг 1) ялагдана
+  if (ropePosition >= WIN_LIMIT) {
+    endGame("Баг 1 ялагдлаа! (Баг 2 хожлоо 🏆)");
+    return true;
+  }
+
+  return false;
+}
+
+function endGame(message) {
+  isGameOver = true;
+  roundLocked = true;
+  questionText.textContent = "Тоглоом дууслаа!";
+  statusText.textContent = message;
+  statusText.style.color = "#dc2626";
+  statusText.style.fontSize = "24px";
+
+  document.querySelectorAll(".teams button").forEach(btn => btn.disabled = true);
 }
 
 function checkAnswer(answer, team, btn) {
-  if (roundLocked) return;
+  if (roundLocked || isGameOver) return;
 
   if (answer === currentQuestion.correctAnswer) {
     roundLocked = true;
     btn.classList.add("correct");
+    statusText.style.color = "#16a34a";
     statusText.textContent = `${team === "left" ? "Баг 1" : "Баг 2"} зөв хариуллаа!`;
-    moveRope(team);
 
-    setTimeout(renderQuestion, 1000);
+    const finished = moveRope(team);
+    if (!finished) {
+      setTimeout(renderQuestion, 1000);
+    }
   } else {
     btn.classList.add("wrong");
     btn.disabled = true;
+    statusText.style.color = "#dc2626";
     statusText.textContent = "Буруу байна, дахин оролдоно уу!";
   }
 }
 
 restartBtn.onclick = () => {
   ropePosition = 0;
+  isGameOver = false;
+  roundLocked = false;
   ropeGroup.style.transform = "translate(-50%, -50%)";
+  statusText.style.fontSize = "20px";
   availableQuestions = [];
   renderQuestion();
 };
