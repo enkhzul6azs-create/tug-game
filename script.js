@@ -134,11 +134,18 @@ let roundLocked = false;
 let isGameOver = false;
 let availableQuestions = [];
 
-const OFFSET_X = 32; // Шинэ зургийн улаан тугийг голлуулах тохиргоо
+// Зургийн улаан тугийг голын шугамтай тааруулах анхны байршил
+const OFFSET_X = 32;
 
-// 36px * 8 = 288px (Яг 8 удаа зөв татаж байж 3 дахь хүүхэд улаан шугамыг бүрэн давна)
-const STEP_SIZE = 36;
-const WIN_LIMIT = 285;
+// Нэг удаа зөв хариулахад татагдах алхам
+const STEP_SIZE = 35;
+
+/* 
+  Сүүлчийн (3 дахь) хүүхэд улаан шугамыг бүрэн давж гарах физик зай:
+  - Зүүн баг татсаар Баруун багийн хамгийн арын хүүхэд шугамаас гарах: -280px
+  - Баруун баг татсаар Зүүн багийн хамгийн арын хүүхэд шугамаас гарах: +280px
+*/
+const LAST_PLAYER_PASSED_LINE = 280;
 
 function shuffle(arr) {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -179,14 +186,14 @@ function moveRope(dir) {
   ropePosition += dir === "left" ? -STEP_SIZE : STEP_SIZE;
   ropeGroup.style.transform = `translate(calc(-50% + ${OFFSET_X}px + ${ropePosition}px), -50%)`;
 
-  // Зүүн тийш 8 удаа татагдаж 3 дахь хүүхэд шугамаас бүрэн гарахад
-  if (ropePosition <= -WIN_LIMIT) {
-    endGame("Баг 2 ялагдлаа! Баг 1 яллаа! 🏆");
+  // Баруун багийн сүүлийн хүүхэд улаан шугамаас бүрэн гарвал: Баг 2 ялагдаж, Баг 1 хожно
+  if (ropePosition <= -LAST_PLAYER_PASSED_LINE) {
+    endGame("Баг 2-ын сүүлчийн тоглогч шугам давлаа! Баг 1 яллаа! 🏆");
     return true;
   }
-  // Баруун тийш 8 удаа татагдаж 3 дахь хүүхэд шугамаас бүрэн гарахад
-  if (ropePosition >= WIN_LIMIT) {
-    endGame("Баг 1 ялагдлаа! Баг 2 яллаа! 🏆");
+  // Зүүн багийн сүүлийн хүүхэд улаан шугамаас бүрэн гарвал: Баг 1 ялагдаж, Баг 2 хожно
+  if (ropePosition >= LAST_PLAYER_PASSED_LINE) {
+    endGame("Баг 1-ийн сүүлчийн тоглогч шугам давлаа! Баг 2 яллаа! 🏆");
     return true;
   }
 
@@ -199,7 +206,7 @@ function endGame(message) {
   questionText.textContent = "Тоглоом дууслаа!";
   statusText.textContent = message;
   statusText.style.color = "#dc2626";
-  statusText.style.fontSize = "26px";
+  statusText.style.fontSize = "24px";
 
   document.querySelectorAll(".teams button").forEach(btn => btn.disabled = true);
 }
@@ -215,7 +222,7 @@ function checkAnswer(answer, team, btn) {
 
     const finished = moveRope(team);
     if (!finished) {
-      setTimeout(renderQuestion, 900);
+      setTimeout(renderQuestion, 800);
     }
   } else {
     btn.classList.add("wrong");
