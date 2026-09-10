@@ -7,69 +7,66 @@ body {
   text-align: center;
   background: #f1f5f9;
   margin: 0;
-  padding: 24px 16px;
+  padding: 10px 16px;
   color: #0f172a;
 }
 
-/* ДҮРМИЙН ҮНДСЭН ТОМ ГАРЧИГ */
+/* ДҮРМИЙН ТОМ ГАРЧИГ */
 #ruleLabel {
-  font-size: 38px;
+  font-size: 30px;
   font-weight: 900;
   color: #1e3a8a;
-  margin: 0 0 14px;
-  letter-spacing: 0.5px;
+  margin: 4px 0;
 }
 
-/* НУТАГ + ААС ГЭХ МЭТ ТОМ АСУУЛТ */
+/* АСУУЛТ (НУТАГ + ААС) */
 #questionText {
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 800;
   color: #1e293b;
-  min-height: 46px;
-  margin: 14px 0;
-  line-height: 1.3;
+  min-height: 34px;
+  margin: 6px 0;
 }
 
-/* ТӨЛӨВ БА ЯЛАЛТЫН МЭДЭГДЭЛ */
+/* ТӨЛӨВ/МЭДЭГДЭЛ */
 #statusText {
-  font-size: 26px;
+  font-size: 20px;
   font-weight: bold;
-  min-height: 36px;
-  margin: 10px 0 20px;
+  min-height: 26px;
+  margin: 4px 0 8px;
 }
 
-/* ТОГЛООМЫН ӨРГӨН ТОМ ТАЛБАЙ */
+/* ОЛС ТАТАЛТЫН ТАЛБАЙ */
 .game-area {
   position: relative;
-  height: 300px;
-  max-width: 960px;
-  margin: 0 auto 28px;
+  height: 200px;
+  max-width: 900px;
+  margin: 0 auto 12px;
   background: #ffffff;
-  border: 4px solid #cbd5e1;
-  border-radius: 24px;
+  border: 3px solid #cbd5e1;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
 
-/* ГОЛЫН УЛААН ТАСАРХАЙ ЗУРААС */
+/* ГОЛЫН УЛААН ЗУРААС */
 .center-line {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 50%;
-  width: 5px;
+  width: 4px;
   background: repeating-linear-gradient(
     to bottom,
     #ef4444 0px,
-    #ef4444 14px,
-    transparent 14px,
-    transparent 24px
+    #ef4444 12px,
+    transparent 12px,
+    transparent 20px
   );
   transform: translateX(-50%);
   z-index: 1;
 }
 
-/* ОЛС БА ЗУРГИЙГ ГОЛЛОХ ХЭСЭГ */
 #ropeGroup {
   position: absolute;
   left: 50%;
@@ -82,56 +79,65 @@ body {
   justify-content: center;
 }
 
-/* ТОМРУУЛСАН ОЛС ТАТАЛТЫН ЗУРАГ */
 .tug-image {
-  height: 230px;
+  height: 165px;
   max-width: none;
   pointer-events: none;
   user-select: none;
   mix-blend-mode: multiply;
 }
 
-/* БАГУУДЫН ХАРИУЛАХ ХЭСЭГ */
+/* БАГУУДЫН ХЭСЭГ */
 .teams {
   display: flex;
   justify-content: center;
-  gap: 28px;
-  max-width: 960px;
+  gap: 16px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 .teams > div {
   flex: 1;
   background: #ffffff;
-  padding: 20px;
-  border-radius: 20px;
+  padding: 12px 14px;
+  border-radius: 16px;
   border: 2px solid #e2e8f0;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
 }
 
 .teams h3 {
-  margin: 0 0 16px;
-  font-size: 26px;
+  margin: 0 0 10px;
+  font-size: 20px;
   font-weight: 800;
   color: #1e293b;
   border-bottom: 2px solid #f1f5f9;
-  padding-bottom: 10px;
+  padding-bottom: 6px;
 }
 
-/* ТОМ ТОД СОНГОЛТЫН ТОВЧЛУУРУУД */
+/* 4 СОНГОЛТЫГ 2 Х 2 БОЛГОН ӨРӨХ ХЭСЭГ (Дэлгэцэнд бүрэн багтаана) */
+#leftAnswers, #rightAnswers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+/* СОНГОЛТЫН ТОВЧЛУУРУУД */
 button {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  font-size: 22px;
+  min-height: 48px;
+  font-size: 19px;
   font-weight: 700;
-  padding: 14px 18px;
-  margin: 10px 0;
-  border-radius: 14px;
+  padding: 8px 10px;
+  margin: 0;
+  border-radius: 10px;
   border: 2px solid #cbd5e1;
   background: #f8fafc;
   color: #1e293b;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   transition: all 0.15s ease-in-out;
 }
 
@@ -166,16 +172,16 @@ button:disabled {
 #restartBtn {
   display: inline-block;
   width: auto;
-  min-width: 220px;
-  margin-top: 28px;
-  padding: 14px 32px;
-  font-size: 20px;
+  min-width: 180px;
+  margin-top: 12px;
+  padding: 10px 24px;
+  font-size: 17px;
   font-weight: 800;
   background: #2563eb;
   color: #ffffff;
   border: none;
-  border-radius: 14px;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
 }
 
 #restartBtn:hover {
