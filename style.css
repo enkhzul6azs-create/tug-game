@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -46,11 +47,10 @@ body {
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
 }
 
-/* УЛААН ТАСАРХАЙ ЗУРААС */
+/* ГОЛЫН УЛААН ТАСАРХАЙ ШУГАМ */
 .center-line {
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 50%;
   width: 4px;
   height: 100%;
@@ -66,27 +66,37 @@ body {
   pointer-events: none;
 }
 
+/* ХҮҮХДҮҮД БОЛОН ОЛС */
 #ropeGroup {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(calc(-50% + 32px), -50%);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --rope-offset: 0px;
+  transform: translate(
+    calc(-50% + var(--rope-offset)),
+    -50%
+  );
+  transition: transform 0.4s
+    cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: max-content;
 }
 
-/* ЗУРГИЙГ ТОМРУУЛСАН */
+/* ОЛС ТАТАЖ БУЙ 8 ХҮҮХДИЙН ЗУРАГ */
 .tug-image {
+  display: block;
   height: 230px;
+  width: auto;
   max-width: none;
   pointer-events: none;
   user-select: none;
   mix-blend-mode: multiply;
 }
 
+/* ХОЁР БАГ */
 .teams {
   display: flex;
   justify-content: center;
@@ -97,11 +107,13 @@ body {
 
 .teams > div {
   flex: 1;
+  min-width: 0;
   background: #ffffff;
   padding: 12px 14px;
   border-radius: 16px;
   border: 2px solid #e2e8f0;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 4px 14px
+    rgba(15, 23, 42, 0.05);
 }
 
 .teams h3 {
@@ -113,7 +125,9 @@ body {
   padding-bottom: 6px;
 }
 
-#leftAnswers, #rightAnswers {
+/* ХАРИУЛТЫН ТОВЧЛУУРУУД */
+#leftAnswers,
+#rightAnswers {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
@@ -134,7 +148,8 @@ button {
   background: #f8fafc;
   color: #1e293b;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 4px
+    rgba(0, 0, 0, 0.04);
   transition: all 0.15s ease-in-out;
 }
 
@@ -153,18 +168,21 @@ button:disabled {
   opacity: 0.6;
 }
 
+/* ЗӨВ ХАРИУЛТ */
 .correct {
   background: #16a34a !important;
   border-color: #15803d !important;
   color: #ffffff !important;
 }
 
+/* БУРУУ ХАРИУЛТ */
 .wrong {
   background: #dc2626 !important;
   border-color: #b91c1c !important;
   color: #ffffff !important;
 }
 
+/* ДАХИН ТОГЛОХ */
 #restartBtn {
   display: inline-block;
   width: auto;
@@ -177,10 +195,47 @@ button:disabled {
   color: #ffffff;
   border: none;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.28);
+  box-shadow: 0 4px 12px
+    rgba(37, 99, 235, 0.28);
 }
 
 #restartBtn:hover {
   background: #1d4ed8;
   transform: translateY(-2px);
+}
+
+/* ЖИЖИГ ДЭЛГЭЦ */
+@media (max-width: 700px) {
+  #ruleLabel {
+    font-size: 26px;
+  }
+
+  #questionText {
+    font-size: 21px;
+  }
+
+  .game-area {
+    height: 220px;
+  }
+
+  .tug-image {
+    height: 185px;
+  }
+
+  .teams {
+    gap: 8px;
+  }
+
+  .teams > div {
+    padding: 8px;
+  }
+
+  .teams h3 {
+    font-size: 17px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 6px;
+  }
 }
