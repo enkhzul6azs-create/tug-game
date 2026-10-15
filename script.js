@@ -1,3 +1,4 @@
+
 const questions = [
   {
     question: "'Нутаг + аас' нийлбэрийг зөв бичсэн нь аль вэ?",
@@ -121,6 +122,7 @@ const questions = [
   }
 ];
 
+// HTML элементүүд
 const questionText = document.getElementById("questionText");
 const leftAnswers = document.getElementById("leftAnswers");
 const rightAnswers = document.getElementById("rightAnswers");
@@ -128,29 +130,49 @@ const statusText = document.getElementById("statusText");
 const ropeGroup = document.getElementById("ropeGroup");
 const restartBtn = document.getElementById("restartBtn");
 
-let currentQuestion;
+// Тоглоомын төлөв
+let currentQuestion = null;
 let ropePosition = 0;
 let roundLocked = false;
 let isGameOver = false;
 let availableQuestions = [];
+let nextQuestionTimer = null;
 
-// Зургийн улаан тугийг голын шугамтай тааруулах анхны байршил
-const OFFSET_X = 32;
-
-// Нэг удаа зөв хариулахад татагдах алхам
+// Олс татах тохиргоо
 const STEP_SIZE = 35;
+const WIN_DISTANCE = 280;
 
-/* 
-  Сүүлчийн (3 дахь) хүүхэд улаан шугамыг бүрэн давж гарах физик зай:
-  - Зүүн баг татсаар Баруун багийн хамгийн арын хүүхэд шугамаас гарах: -280px
-  - Баруун баг татсаар Зүүн багийн хамгийн арын хүүхэд шугамаас гарах: +280px
-*/
-const LAST_PLAYER_PASSED_LINE = 280;
+// Зургийн улаан туузны төвийг тохируулах
+// Тууз зургийн голд байвал 0 байна.
+const RIBBON_CORRECTION = 0;
 
-function shuffle(arr) {
-  return [...arr].sort(() => Math.random() - 0.5);
+// Олсны байрлалыг шинэчлэх
+function updateRopePosition() {
+  ropeGroup.style.setProperty(
+    "--ribbon-correction",
+    `${RIBBON_CORRECTION}px`
+  );
+
+  ropeGroup.style.setProperty(
+    "--rope-offset",
+    `${ropePosition}px`
+  );
 }
 
+// Асуултын дарааллыг холих
+function shuffle(arr) {
+  const result = [...arr];
+
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+
+  return result;
+}
+
+// Шинэ асуулт харуулах
 function renderQuestion() {
   if (isGameOver) return;
 
@@ -158,10 +180,11 @@ function renderQuestion() {
   statusText.textContent = "";
 
   if (availableQuestions.length === 0) {
-    availableQuestions = shuffle([...questions]);
+    availableQuestions = shuffle(questions);
   }
 
   currentQuestion = availableQuestions.pop();
+
   questionText.textContent = currentQuestion.question;
 
   leftAnswers.innerHTML = "";
@@ -169,77 +192,114 @@ function renderQuestion() {
 
   const shuffledOptions = shuffle(currentQuestion.options);
 
-  shuffledOptions.forEach(opt => {
-    const b1 = document.createElement("button");
-    b1.textContent = opt;
-    b1.onclick = () => checkAnswer(opt, "left", b1);
-    leftAnswers.appendChild(b1);
+  shuffledOptions.forEach(option => {
+    const leftButton = document.createElement("button");
+    leftButton.textContent = option;
+    leftButton.onclick = () => {
+      checkAnswer(option, "left", leftButton);
+    };
+    leftAnswers.appendChild(leftButton);
 
-    const b2 = document.createElement("button");
-    b2.textContent = opt;
-    b2.onclick = () => checkAnswer(opt, "right", b2);
-    rightAnswers.appendChild(b2);
+    const rightButton = document.createElement("button");
+    rightButton.textContent = option;
+    rightButton.onclick = () => {
+      checkAnswer(option, "right", rightButton);
+    };
+    rightAnswers.appendChild(rightButton);
   });
 }
 
-function moveRope(dir) {
-  ropePosition += dir === "left" ? -STEP_SIZE : STEP_SIZE;
-  ropeGroup.style.transform = `translate(calc(-50% + ${OFFSET_X}px + ${ropePosition}px), -50%)`;
+// Олсыг зүүн эсвэл баруун тийш татах
+function moveRope(team) {
+  if (team === "left") {
+    ropePosition -= STEP_SIZE;
+  } else {
+    ropePosition += STEP_SIZE;
+  }
 
-  // Баруун багийн сүүлийн хүүхэд улаан шугамаас бүрэн гарвал: Баг 2 ялагдаж, Баг 1 хожно
-  if (ropePosition <= -LAST_PLAYER_PASSED_LINE) {
-    endGame("Баг 2-ын сүүлчийн тоглогч шугам давлаа! Баг 1 яллаа! 🏆");
+  updateRopePosition();
+
+  if (ropePosition <= -WIN_DISTANCE) {
+    endGame(
+      "Баг 2-ын сүүлчийн тоглогч шугам давлаа! Баг 1 яллаа! 🏆"
+    );
     return true;
   }
-  // Зүүн багийн сүүлийн хүүхэд улаан шугамаас бүрэн гарвал: Баг 1 ялагдаж, Баг 2 хожно
-  if (ropePosition >= LAST_PLAYER_PASSED_LINE) {
-    endGame("Баг 1-ийн сүүлчийн тоглогч шугам давлаа! Баг 2 яллаа! 🏆");
+
+  if (ropePosition >= WIN_DISTANCE) {
+    endGame(
+      "Баг 1-ийн сүүлчийн тоглогч шугам давлаа! Баг 2 яллаа! 🏆"
+    );
     return true;
   }
 
   return false;
 }
 
+// Ялагчийг зарлах
 function endGame(message) {
   isGameOver = true;
   roundLocked = true;
+
   questionText.textContent = "Тоглоом дууслаа!";
   statusText.textContent = message;
   statusText.style.color = "#dc2626";
   statusText.style.fontSize = "24px";
 
-  document.querySelectorAll(".teams button").forEach(btn => btn.disabled = true);
+  document.querySelectorAll(".teams button").forEach(button => {
+    button.disabled = true;
+  });
 }
 
-function checkAnswer(answer, team, btn) {
+// Хариулт шалгах
+function checkAnswer(answer, team, button) {
   if (roundLocked || isGameOver) return;
 
   if (answer === currentQuestion.correctAnswer) {
     roundLocked = true;
-    btn.classList.add("correct");
+    button.classList.add("correct");
+
     statusText.style.color = "#16a34a";
-    statusText.textContent = `${team === "left" ? "Баг 1" : "Баг 2"} зөв хариуллаа!`;
+    statusText.textContent =
+      `${team === "left" ? "Баг 1" : "Баг 2"} зөв хариуллаа!`;
 
     const finished = moveRope(team);
+
     if (!finished) {
-      setTimeout(renderQuestion, 800);
+      nextQuestionTimer = setTimeout(() => {
+        nextQuestionTimer = null;
+        renderQuestion();
+      }, 800);
     }
   } else {
-    btn.classList.add("wrong");
-    btn.disabled = true;
+    button.classList.add("wrong");
+    button.disabled = true;
+
     statusText.style.color = "#dc2626";
-    statusText.textContent = "Буруу байна, дахин оролдоно уу!";
+    statusText.textContent =
+      "Буруу байна, дахин оролдоно уу!";
   }
 }
 
+// Дахин тоглох
 restartBtn.onclick = () => {
+  if (nextQuestionTimer !== null) {
+    clearTimeout(nextQuestionTimer);
+    nextQuestionTimer = null;
+  }
+
   ropePosition = 0;
-  isGameOver = false;
   roundLocked = false;
-  ropeGroup.style.transform = `translate(calc(-50% + ${OFFSET_X}px), -50%)`;
-  statusText.style.fontSize = "22px";
+  isGameOver = false;
   availableQuestions = [];
+
+  statusText.textContent = "";
+  statusText.style.fontSize = "22px";
+
+  updateRopePosition();
   renderQuestion();
 };
 
+// Тоглоом эхлүүлэх
+updateRopePosition();
 renderQuestion();
