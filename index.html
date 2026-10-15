@@ -1,39 +1,75 @@
+
 <!DOCTYPE html>
 <html lang="mn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Олс таталт - Гээгдэх эгшгийн дүрэм</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <div id="ruleLabel">Гээгдэх эгшгийн дүрэм</div>
-  <div id="questionText">Асуулт ачаалж байна...</div>
-  <div id="statusText"></div>
-
-  <div class="game-area">
-    <div class="center-line"></div>
-    <div id="ropeGroup">
-      <img src="image.png" alt="Олс таталт" class="tug-image">
-    </div>
+  <!-- ХИЧЭЭЛИЙН ГАРЧИГ -->
+  <div id="ruleLabel">
+    Гээгдэх эгшгийн дүрэм
   </div>
 
+  <!-- АСУУЛТ -->
+  <div id="questionText">
+    Асуулт ачаалж байна...
+  </div>
+
+  <!-- ХАРИУЛТЫН МЭДЭГДЭЛ -->
+  <div id="statusText"></div>
+
+  <!-- ОЛС ТАТАЛТЫН ТАЛБАЙ -->
+  <div class="game-area">
+
+    <!-- ГОЛЫН УЛААН ТАСАРХАЙ ШУГАМ -->
+    <div class="center-line"></div>
+
+    <!-- ХӨДӨЛГӨХ ЗУРАГ -->
+    <div id="ropeGroup">
+
+      <img
+        src="image.png"
+        alt="Олс татаж буй хоёр баг"
+        class="tug-image"
+      >
+
+    </div>
+
+  </div>
+
+  <!-- ХОЁР БАГИЙН ХАРИУЛТ -->
   <div class="teams">
+
+    <!-- БАГ 1 -->
     <div>
       <h3>Баг 1 (Зүүн)</h3>
       <div id="leftAnswers"></div>
     </div>
+
+    <!-- БАГ 2 -->
     <div>
       <h3>Баг 2 (Баруун)</h3>
       <div id="rightAnswers"></div>
     </div>
+
   </div>
 
+  <!-- ДАХИН ТОГЛОХ -->
   <div>
-    <button id="restartBtn">Дахин тоглох</button>
+    <button id="restartBtn">
+      Дахин тоглох
+    </button>
   </div>
 
+  <!-- ТОГЛООМЫН JAVASCRIPT -->
   <script src="script.js"></script>
+
 </body>
 </html>
