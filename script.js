@@ -2,7 +2,7 @@
 const questions = [
   {
     question: "'Нутаг + аас' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["нутгаас", "нутагаас", "нутгаасаа", "нутагаасаа"],
+    options: ["нутгаас", "нутагаас", "нутгаасаа", "нутагас"],
     correctAnswer: "нутгаас"
   },
   {
@@ -10,58 +10,59 @@ const questions = [
     options: ["хавраас", "хавараас", "хавруудаас", "хавраасаа"],
     correctAnswer: "хавраас"
   },
-   {
+  {
     question: "'Цэрэг + үүд' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["цэрэгүүд", "цэргүүд", "цэрэгүүд", "цэрэггүүд"],
+    options: ["цэрэгүүд", "цэргүүд", "цэрэггүүд", "цэргүүдээ"],
     correctAnswer: "цэргүүд"
   },
   {
     question: "'Хадаг + аар' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["хадагаар", "хадгаар", "хадагаар", "хадгaar"],
+    options: ["хадагаар", "хадгаар", "хадагаарa", "хадгаараа"],
     correctAnswer: "хадгаар"
   },
   {
     question: "'Бэлэг + ийн' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["бэлэгийн", "бэлгийн", "бэлэгийн", "бэлгэийн"],
+    options: ["бэлэгийн", "бэлгийн", "бэлэгний", "бэлгэийн"],
     correctAnswer: "бэлгийн"
   },
   {
     question: "'Нарлаг + аар' нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["нарлагаар", "нарлгаар", "нарлагaar", "нарлагээр"],
+    options: ["нарлагаар", "нарлгаар", "нарлагээр", "нарлагаараа"],
     correctAnswer: "нарлагаар"
-  }
+  },
   {
     question: "'Аймаг + ийн' нийлбэрийг зөв бичсэн нь аль вэ?",
     options: ["аймгийн", "аймагийн", "аймгиин", "аймагын"],
     correctAnswer: "аймгийн"
   },
-   {
-    question: "'гавар + ыг' нийлбэрийг зөв бичсэн нь аль вэ?",
+  {
+    question: "'Гавар + ын' нийлбэрийг зөв бичсэн нь аль вэ?",
     options: ["гаварын", "гаварийн", "гаврын", "гаврийн"],
     correctAnswer: "гаврын"
-  },  {
-    question: "Чарга + ыг нийлбэрийг зөв бичсэн нь аль вэ?",
+  },
+  {
+    question: "'Чарга + ыг' нийлбэрийг зөв бичсэн нь аль вэ?",
     options: ["чаргаыг", "чаргийг", "чаргыг", "чаргаийг"],
     correctAnswer: "чаргыг"
   },
   {
-    question: "Хана + аар нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["ханаар", "ханaгаар", "ханыгаар", "ханааар"],
+    question: "'Хана + аар' нийлбэрийг зөв бичсэн нь аль вэ?",
+    options: ["ханаар", "ханагaar", "ханыгаар", "ханааар"],
     correctAnswer: "ханаар"
   },
   {
-    question: "Хань + аар нийлбэрийг зөв бичсэн нь аль вэ?",
+    question: "'Хань + аар' нийлбэрийг зөв бичсэн нь аль вэ?",
     options: ["ханаар", "ханьар", "ханиар", "ханааар"],
     correctAnswer: "ханиар"
   },
   {
-    question: "Сана + уул нийлбэрийг зөв бичсэн нь аль вэ?",
+    question: "'Сана + уул' нийлбэрийг зөв бичсэн нь аль вэ?",
     options: ["санауул", "сануул", "сануулл", "сануал"],
     correctAnswer: "сануул"
   },
   {
-    question: "Өмнө + өөс нийлбэрийг зөв бичсэн нь аль вэ?",
-    options: ["өмнөөөс", "өмнөөгөөс", "өмнөөс", "өмнөөөс"],
+    question: "'Өмнө + өөс' нийлбэрийг зөв бичсэн нь аль вэ?",
+    options: ["өмнөөөс", "өмнөөгөөс", "өмнөөс", "өмнөө"],
     correctAnswer: "өмнөөс"
   },
   {
@@ -87,7 +88,7 @@ const questions = [
   {
     question: "'Өнгө + ийн' нийлбэрийг зөв бичсэн нь аль вэ?",
     options: ["өнгийн", "өнгөийн", "өнгөний", "өнгиййн"],
-    correctAnswer: "өнгийн"
+    correctAnswer: "өнгөний"
   },
   {
     question: "'Авга + ыг' нийлбэрийг зөв бичсэн нь аль вэ?",
@@ -185,7 +186,7 @@ const questions = [
     correctAnswer: "хөгжмөөр"
   },
   {
-    question: "'дархан + ы' нийлбэрийг зөв бичсэн нь аль вэ?",
+    question: "'Дархан + ы' нийлбэрийг зөв бичсэн нь аль вэ?",
     options: ["дархны", "дарханы", "дарханий", "дархний"],
     correctAnswer: "дархны"
   },
@@ -215,9 +216,6 @@ let nextQuestionTimer = null;
 // Олс татах тохиргоо
 const STEP_SIZE = 35;
 const WIN_DISTANCE = 280;
-
-// Зургийн улаан туузны төвийг тохируулах
-// Тууз зургийн голд байвал 0 байна.
 const RIBBON_CORRECTION = 0;
 
 // Олсны байрлалыг шинэчлэх
@@ -239,7 +237,6 @@ function shuffle(arr) {
 
   for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-
     [result[i], result[j]] = [result[j], result[i]];
   }
 
@@ -268,17 +265,21 @@ function renderQuestion() {
 
   shuffledOptions.forEach(option => {
     const leftButton = document.createElement("button");
+
     leftButton.textContent = option;
     leftButton.onclick = () => {
       checkAnswer(option, "left", leftButton);
     };
+
     leftAnswers.appendChild(leftButton);
 
     const rightButton = document.createElement("button");
+
     rightButton.textContent = option;
     rightButton.onclick = () => {
       checkAnswer(option, "right", rightButton);
     };
+
     rightAnswers.appendChild(rightButton);
   });
 }
@@ -350,8 +351,7 @@ function checkAnswer(answer, team, button) {
     button.disabled = true;
 
     statusText.style.color = "#dc2626";
-    statusText.textContent =
-      "Буруу байна, дахин оролдоно уу!";
+    statusText.textContent = "Буруу байна, дахин оролдоно уу!";
   }
 }
 
@@ -369,6 +369,11 @@ restartBtn.onclick = () => {
 
   statusText.textContent = "";
   statusText.style.fontSize = "22px";
+  statusText.style.color = "";
+
+  document.querySelectorAll(".teams button").forEach(button => {
+    button.disabled = false;
+  });
 
   updateRopePosition();
   renderQuestion();
