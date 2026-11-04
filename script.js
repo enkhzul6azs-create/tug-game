@@ -1,4 +1,8 @@
+// ========================================
+// ГЭЭГДЭХ ЭГШГИЙН ДҮРЭМ - ОЛС ТАТАЛТ
+// ========================================
 
+// АСУУЛТЫН САН
 const questions = [
   {
     question: "'Нутаг + аас' нийлбэрийг зөв бичсэн нь аль вэ?",
@@ -197,7 +201,10 @@ const questions = [
   }
 ];
 
-// HTML элементүүд
+// ========================================
+// HTML ЭЛЕМЕНТҮҮД
+// ========================================
+
 const questionText = document.getElementById("questionText");
 const leftAnswers = document.getElementById("leftAnswers");
 const rightAnswers = document.getElementById("rightAnswers");
@@ -205,7 +212,16 @@ const statusText = document.getElementById("statusText");
 const ropeGroup = document.getElementById("ropeGroup");
 const restartBtn = document.getElementById("restartBtn");
 
-// Тоглоомын төлөв
+const victoryScreen = document.getElementById("victoryScreen");
+const winnerText = document.getElementById("winnerText");
+const victoryRestartBtn = document.getElementById("victoryRestartBtn");
+const confettiContainer = document.getElementById("confettiContainer");
+const gameArea = document.querySelector(".game-area");
+
+// ========================================
+// ТОГЛООМЫН ТӨЛӨВ
+// ========================================
+
 let currentQuestion = null;
 let ropePosition = 0;
 let roundLocked = false;
@@ -213,37 +229,58 @@ let isGameOver = false;
 let availableQuestions = [];
 let nextQuestionTimer = null;
 
-// Олс татах тохиргоо
-const STEP_SIZE = 35;
-const WIN_DISTANCE = 280;
-const RIBBON_CORRECTION = 0;
+const STEPS_TO_WIN = 8;
 
-// Олсны байрлалыг шинэчлэх
+// ========================================
+// ОЛСНЫ ХӨДӨЛГӨӨН
+// ========================================
+
+function getWinDistance() {
+  return Math.min(
+    280,
+    Math.max(72, gameArea.clientWidth * 0.29)
+  );
+}
+
+function getStepSize() {
+  return getWinDistance() / STEPS_TO_WIN;
+}
+
 function updateRopePosition() {
   ropeGroup.style.setProperty(
     "--ribbon-correction",
-    `${RIBBON_CORRECTION}px`
+    "0px"
   );
 
   ropeGroup.style.setProperty(
     "--rope-offset",
-    `${ropePosition}px`
+    `${ropePosition * getStepSize()}px`
   );
 }
 
-// Асуултын дарааллыг холих
+// ========================================
+// АСУУЛТ ХОЛИХ
+// ========================================
+
 function shuffle(arr) {
   const result = [...arr];
 
   for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
+
+    [result[i], result[j]] = [
+      result[j],
+      result[i]
+    ];
   }
 
   return result;
 }
 
-// Шинэ асуулт харуулах
+// ========================================
+// ШИНЭ АСУУЛТ ГАРГАХ
+// ========================================
+
 function renderQuestion() {
   if (isGameOver) return;
 
@@ -261,21 +298,30 @@ function renderQuestion() {
   leftAnswers.innerHTML = "";
   rightAnswers.innerHTML = "";
 
-  const shuffledOptions = shuffle(currentQuestion.options);
+  const shuffledOptions = shuffle(
+    currentQuestion.options
+  );
 
   shuffledOptions.forEach(option => {
+
+    // ЗҮҮН БАГ
     const leftButton = document.createElement("button");
 
+    leftButton.type = "button";
     leftButton.textContent = option;
+
     leftButton.onclick = () => {
       checkAnswer(option, "left", leftButton);
     };
 
     leftAnswers.appendChild(leftButton);
 
+    // БАРУУН БАГ
     const rightButton = document.createElement("button");
 
+    rightButton.type = "button";
     rightButton.textContent = option;
+
     rightButton.onclick = () => {
       checkAnswer(option, "right", rightButton);
     };
@@ -284,57 +330,206 @@ function renderQuestion() {
   });
 }
 
-// Олсыг зүүн эсвэл баруун тийш татах
+// ========================================
+// ОЛС ТАТАХ
+// ========================================
+
 function moveRope(team) {
+
   if (team === "left") {
-    ropePosition -= STEP_SIZE;
+    ropePosition -= 1;
   } else {
-    ropePosition += STEP_SIZE;
+    ropePosition += 1;
   }
 
   updateRopePosition();
 
-  if (ropePosition <= -WIN_DISTANCE) {
-    endGame(
-      "Баг 2-ын сүүлчийн тоглогч шугам давлаа! Баг 1 яллаа! 🏆"
-    );
-    return true;
-  }
-
-  if (ropePosition >= WIN_DISTANCE) {
-    endGame(
-      "Баг 1-ийн сүүлчийн тоглогч шугам давлаа! Баг 2 яллаа! 🏆"
-    );
+  if (Math.abs(ropePosition) >= STEPS_TO_WIN) {
+    endGame(team);
     return true;
   }
 
   return false;
 }
 
-// Ялагчийг зарлах
-function endGame(message) {
+// ========================================
+// КОНФЕТТИ ҮҮСГЭХ
+// ========================================
+
+function showConfetti() {
+
+  confettiContainer.innerHTML = "";
+
+  const colors = [
+    "#fbbf24",
+    "#ef4444",
+    "#22c55e",
+    "#3b82f6",
+    "#a855f7",
+    "#f472b6"
+  ];
+
+  for (let i = 0; i < 90; i++) {
+
+    const piece = document.createElement("span");
+
+    piece.className = "confetti";
+
+    piece.style.setProperty(
+      "--confetti-x",
+      `${Math.random() * 100}%`
+    );
+
+    piece.style.setProperty(
+      "--confetti-color",
+      colors[i % colors.length]
+    );
+
+    piece.style.setProperty(
+      "--drift",
+      `${(Math.random() - 0.5) * 180}px`
+    );
+
+    piece.style.setProperty(
+      "--fall-duration",
+      `${2.6 + Math.random() * 2.3}s`
+    );
+
+    piece.style.setProperty(
+      "--fall-delay",
+      `${Math.random() * 1.4}s`
+    );
+
+    confettiContainer.appendChild(piece);
+  }
+}
+
+// ========================================
+// ЯЛАЛТЫН ХӨГЖИМ
+// ========================================
+
+let audioContext = null;
+
+function playVictorySound() {
+  try {
+    const AudioContextClass =
+      window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContextClass) return;
+
+    if (!audioContext) {
+      audioContext = new AudioContextClass();
+    }
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+    const notes = [
+      523.25,
+      659.25,
+      783.99,
+      1046.50,
+      783.99,
+      1046.50
+    ];
+
+    const startTime = audioContext.currentTime + 0.05;
+
+    notes.forEach((frequency, index) => {
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+
+      const start = startTime + index * 0.19;
+      const end = start + 0.17;
+
+      oscillator.type = "triangle";
+      oscillator.frequency.value = frequency;
+
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(
+        0.14,
+        start + 0.02
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        end
+      );
+
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+
+      oscillator.start(start);
+      oscillator.stop(end);
+    });
+
+  } catch (error) {
+    console.log("Дуу тоглуулах боломжгүй:", error);
+  }
+}
+
+// ========================================
+// ЯЛАГЧИЙГ ЗАРЛАХ
+// ========================================
+
+function endGame(team) {
+
   isGameOver = true;
   roundLocked = true;
 
-  questionText.textContent = "Тоглоом дууслаа!";
-  statusText.textContent = message;
-  statusText.style.color = "#dc2626";
-  statusText.style.fontSize = "24px";
+  if (nextQuestionTimer !== null) {
+    clearTimeout(nextQuestionTimer);
+    nextQuestionTimer = null;
+  }
 
-  document.querySelectorAll(".teams button").forEach(button => {
-    button.disabled = true;
-  });
+  const winningTeam =
+    team === "left" ? "БАГ 1" : "БАГ 2";
+
+  questionText.textContent = "Тоглоом дууслаа!";
+
+  statusText.textContent =
+    `${winningTeam} ЯЛЛАА! 🏆`;
+
+  statusText.style.color = "#16a34a";
+
+  document.querySelectorAll(".teams button")
+    .forEach(button => {
+      button.disabled = true;
+    });
+
+  // ЯЛАГЧИЙН НЭР
+  winnerText.textContent =
+    `${winningTeam} ЯЛЛАА!`;
+
+  // ЯЛАЛТЫН ДЭЛГЭЦ
+  victoryScreen.hidden = false;
+
+  // КОНФЕТТИ
+  showConfetti();
+
+  // ХӨГЖИМ
+  playVictorySound();
+
+  victoryRestartBtn.focus();
 }
 
-// Хариулт шалгах
+// ========================================
+// ХАРИУЛТ ШАЛГАХ
+// ========================================
+
 function checkAnswer(answer, team, button) {
+
   if (roundLocked || isGameOver) return;
 
   if (answer === currentQuestion.correctAnswer) {
+
     roundLocked = true;
+
     button.classList.add("correct");
 
     statusText.style.color = "#16a34a";
+
     statusText.textContent =
       `${team === "left" ? "Баг 1" : "Баг 2"} зөв хариуллаа!`;
 
@@ -342,21 +537,31 @@ function checkAnswer(answer, team, button) {
 
     if (!finished) {
       nextQuestionTimer = setTimeout(() => {
+
         nextQuestionTimer = null;
         renderQuestion();
+
       }, 800);
     }
+
   } else {
+
     button.classList.add("wrong");
     button.disabled = true;
 
     statusText.style.color = "#dc2626";
-    statusText.textContent = "Буруу байна, дахин оролдоно уу!";
+
+    statusText.textContent =
+      "Буруу байна, дахин оролдоно уу!";
   }
 }
 
-// Дахин тоглох
-restartBtn.onclick = () => {
+// ========================================
+// ДАХИН ТОГЛОХ
+// ========================================
+
+function restartGame() {
+
   if (nextQuestionTimer !== null) {
     clearTimeout(nextQuestionTimer);
     nextQuestionTimer = null;
@@ -368,17 +573,32 @@ restartBtn.onclick = () => {
   availableQuestions = [];
 
   statusText.textContent = "";
-  statusText.style.fontSize = "22px";
   statusText.style.color = "";
 
-  document.querySelectorAll(".teams button").forEach(button => {
-    button.disabled = false;
-  });
+  victoryScreen.hidden = true;
+  confettiContainer.innerHTML = "";
 
   updateRopePosition();
   renderQuestion();
-};
+}
 
-// Тоглоом эхлүүлэх
+// ========================================
+// ТОВЧЛУУРУУД
+// ========================================
+
+restartBtn.onclick = restartGame;
+
+victoryRestartBtn.onclick = restartGame;
+
+// УТАСНЫ ДЭЛГЭЦ ЭРГЭХ ҮЕД
+window.addEventListener(
+  "resize",
+  updateRopePosition
+);
+
+// ========================================
+// ТОГЛООМ ЭХЛҮҮЛЭХ
+// ========================================
+
 updateRopePosition();
 renderQuestion();
