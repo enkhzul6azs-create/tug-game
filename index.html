@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="mn">
 <head>
@@ -6,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Олс таталт - Гээгдэх эгшгийн дүрэм</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,7 +21,7 @@
   </div>
 
   <!-- ХАРИУЛТЫН МЭДЭГДЭЛ -->
-  <div id="statusText"></div>
+  <div id="statusText" aria-live="polite"></div>
 
   <!-- ОЛС ТАТАЛТЫН ТАЛБАЙ -->
   <div class="game-area">
@@ -33,13 +31,11 @@
 
     <!-- ХӨДӨЛГӨХ ЗУРАГ -->
     <div id="ropeGroup">
-
       <img
         src="image.png"
         alt="Олс татаж буй хоёр баг"
         class="tug-image"
       >
-
     </div>
 
   </div>
@@ -63,9 +59,35 @@
 
   <!-- ДАХИН ТОГЛОХ -->
   <div>
-    <button id="restartBtn">
-      Дахин тоглох
+    <button id="restartBtn" type="button">
+      🔄 Дахин тоглох
     </button>
+  </div>
+
+  <!-- ЯЛАЛТЫН ДЭЛГЭЦ -->
+  <div id="victoryScreen" class="victory-screen" hidden>
+
+    <!-- КОНФЕТТИ -->
+    <div id="confettiContainer"></div>
+
+    <div class="victory-content">
+
+      <div class="trophy">🏆</div>
+
+      <h1>🎉 БАЯР ХҮРГЭЕ! 🎉</h1>
+
+      <h2 id="winnerText">
+        БАГ 1 ЯЛЛАА!
+      </h2>
+
+      <p>🌟 МУНДАГ БАЙЛАА! 🌟</p>
+
+      <button id="victoryRestartBtn" type="button">
+        🔄 Дахин тоглох
+      </button>
+
+    </div>
+
   </div>
 
   <!-- ТОГЛООМЫН JAVASCRIPT -->
